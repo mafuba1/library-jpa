@@ -40,5 +40,5 @@ build/
 
 
 ### Recources ###
-src/main/resources/
+src/main/resources/*
 !src/main/resources/hibernate.properties.origin
