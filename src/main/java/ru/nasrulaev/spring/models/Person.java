@@ -1,12 +1,5 @@
 package ru.nasrulaev.spring.models;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-
-@Entity
-@Table(name = "person")
 public class Person {
 
     @Column(name = "user_id")
@@ -22,6 +15,9 @@ public class Person {
     @Column(name = "birth_year")
     @Min(value = 1900, message = "Year of birth must be at least 1900")
     private int birthYear;
+
+    @OneToMany(mappedBy = "holder", cascade = CascadeType.PERSIST)
+    private List<Book> bookList;
 
     public Person() {
     }
