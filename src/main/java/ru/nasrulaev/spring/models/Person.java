@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name = "person")
 public class Person {
@@ -22,6 +24,9 @@ public class Person {
     @Column(name = "birth_year")
     @Min(value = 1900, message = "Year of birth must be at least 1900")
     private int birthYear;
+
+    @OneToMany(mappedBy = "holder", cascade = CascadeType.PERSIST)
+    private List<Book> bookList;
 
     public Person() {
     }
