@@ -95,7 +95,7 @@ public class Book {
     }
 
     public boolean isOverdue() {
-        return isOverdue;
+        return new Date().getTime() - takingTime.getTime() >= 864000000L;
     }
 
     public void setOverdue(boolean overdue) {
