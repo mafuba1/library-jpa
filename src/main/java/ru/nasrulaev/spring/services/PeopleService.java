@@ -1,5 +1,6 @@
-package ru.nasrulaev.spring;
+package ru.nasrulaev.spring.services;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +9,7 @@ import ru.nasrulaev.spring.models.Person;
 import ru.nasrulaev.spring.repositories.BooksRepository;
 import ru.nasrulaev.spring.repositories.PeopleRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +52,13 @@ public class PeopleService {
     }
 
     public List<Book> getBooks(int id) {
-        return booksRepository.findBooksByHolderId(id);
+        Optional<Person> person = peopleRepository.findById(id);
+
+        if (person.isEmpty()) {
+            Hibernate.initialize(person.get().getBookList());
+            return person.get().getBookList();
+        } else
+            return Collections.emptyList();
     }
+
 }
