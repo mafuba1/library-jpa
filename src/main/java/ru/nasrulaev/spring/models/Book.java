@@ -40,6 +40,9 @@ public class Book {
     @Temporal(TemporalType.TIMESTAMP)
     private Date takingTime;
 
+    @Transient
+    private boolean isOverdue;
+
     public Book() {
     }
 
@@ -89,5 +92,13 @@ public class Book {
 
     public void setTakingTime(Date takingTime) {
         this.takingTime = takingTime;
+    }
+
+    public boolean isOverdue() {
+        return isOverdue;
+    }
+
+    public void setOverdue(boolean overdue) {
+        isOverdue = overdue;
     }
 }
