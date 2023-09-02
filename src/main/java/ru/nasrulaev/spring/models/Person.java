@@ -1,5 +1,10 @@
 package ru.nasrulaev.spring.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "Person")
 public class Person {
 
     @Column(name = "user_id")
