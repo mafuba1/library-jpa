@@ -3,6 +3,7 @@ package ru.nasrulaev.spring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.nasrulaev.spring.models.Book;
 import ru.nasrulaev.spring.models.Person;
 import ru.nasrulaev.spring.repositories.BooksRepository;
 import ru.nasrulaev.spring.repositories.PeopleRepository;
@@ -46,5 +47,9 @@ public class PeopleService {
     @Transactional
     public void delete(int id) {
         peopleRepository.deleteById(id);
+    }
+
+    public List<Book> getBooks(int id) {
+        return booksRepository.findBooksByHolderId(id);
     }
 }
