@@ -54,7 +54,7 @@ public class PeopleService {
     public List<Book> getBooks(int id) {
         Optional<Person> person = peopleRepository.findById(id);
 
-        if (person.isEmpty()) {
+        if (person.isPresent()) {
             Hibernate.initialize(person.get().getBookList());
             return person.get().getBookList();
         } else
