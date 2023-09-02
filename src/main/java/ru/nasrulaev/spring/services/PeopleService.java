@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nasrulaev.spring.models.Book;
 import ru.nasrulaev.spring.models.Person;
-import ru.nasrulaev.spring.repositories.BooksRepository;
 import ru.nasrulaev.spring.repositories.PeopleRepository;
 
 import java.util.Collections;
@@ -18,12 +17,10 @@ import java.util.Optional;
 public class PeopleService {
 
     private PeopleRepository peopleRepository;
-    private BooksRepository booksRepository;
 
     @Autowired
-    public PeopleService(PeopleRepository peopleRepository, BooksRepository booksRepository) {
+    public PeopleService(PeopleRepository peopleRepository) {
         this.peopleRepository = peopleRepository;
-        this.booksRepository = booksRepository;
     }
 
     public List<Person> findAll() {
