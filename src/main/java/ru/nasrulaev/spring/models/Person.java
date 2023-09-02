@@ -55,5 +55,11 @@ public class Person {
         this.birthYear = birthYear;
     }
 
+    public List<Book> getBookList() {
+        return bookList;
+    }
 
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
+    }
 }
