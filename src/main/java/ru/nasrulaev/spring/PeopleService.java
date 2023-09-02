@@ -8,6 +8,7 @@ import ru.nasrulaev.spring.repositories.BooksRepository;
 import ru.nasrulaev.spring.repositories.PeopleRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -26,4 +27,8 @@ public class PeopleService {
         return peopleRepository.findAll();
     }
 
+    public Person findOne(int id) {
+        Optional<Person> person = peopleRepository.findById(id);
+        return person.orElse(null);
+    }
 }
