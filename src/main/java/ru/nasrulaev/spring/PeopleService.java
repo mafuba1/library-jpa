@@ -42,4 +42,9 @@ public class PeopleService {
         updatedPerson.setId(id);
         peopleRepository.save(updatedPerson);
     }
+
+    @Transactional
+    public void delete(int id) {
+        peopleRepository.deleteById(id);
+    }
 }
