@@ -8,9 +8,12 @@ import jakarta.validation.constraints.Size;
 
 import java.util.Date;
 
+
 @Entity
 @Table(name = "book")
 public class Book {
+
+    private static final long TEN_DAYS = 864000000L;
 
     @Column(name = "book_id")
     @Id
@@ -95,10 +98,11 @@ public class Book {
     }
 
     public boolean isOverdue() {
-        return new Date().getTime() - takingTime.getTime() >= 864000000L;
+        return new Date().getTime() - takingTime.getTime() >= TEN_DAYS;
     }
 
     public void setOverdue(boolean overdue) {
         isOverdue = overdue;
     }
+
 }
