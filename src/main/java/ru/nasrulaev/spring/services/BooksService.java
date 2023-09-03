@@ -7,6 +7,7 @@ import ru.nasrulaev.spring.models.Book;
 import ru.nasrulaev.spring.models.Person;
 import ru.nasrulaev.spring.repositories.BooksRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +51,7 @@ public class BooksService {
         Person person = new Person();
         person.setId(personId);
         book.setHolder(person);
+        book.setTakingTime(new Date());
     }
 
     @Transactional
