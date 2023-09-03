@@ -51,4 +51,10 @@ public class BooksService {
         person.setId(personId);
         book.setHolder(person);
     }
+
+    @Transactional
+    public void free(Book book) {
+        book.setHolder(null);
+    }
+
 }
