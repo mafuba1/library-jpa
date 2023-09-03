@@ -37,4 +37,11 @@ public class BooksService {
     public void save(Book book) {
         booksRepository.save(book);
     }
+
+    @Transactional
+    public void update(int id, Book updatedBook) {
+        updatedBook.setId(id);
+        booksRepository.save(updatedBook);
+    }
+
 }
