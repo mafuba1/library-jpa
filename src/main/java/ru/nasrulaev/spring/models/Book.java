@@ -13,6 +13,7 @@ import java.util.Date;
 @Table(name = "book")
 public class Book {
 
+    @Transient
     private static final long TEN_DAYS = 864000000L;
 
     @Column(name = "book_id")
