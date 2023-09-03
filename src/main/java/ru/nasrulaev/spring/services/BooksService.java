@@ -28,4 +28,9 @@ public class BooksService {
         Optional<Book> book = booksRepository.findById(id);
         return book.orElse(null);
     }
+
+    public List<Book> searchByTitle(String title) {
+        return booksRepository.findBooksByTitleStartingWith(title);
+    }
+
 }
