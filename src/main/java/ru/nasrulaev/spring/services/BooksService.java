@@ -33,4 +33,8 @@ public class BooksService {
         return booksRepository.findBooksByTitleStartingWith(title);
     }
 
+    @Transactional
+    public void save(Book book) {
+        booksRepository.save(book);
+    }
 }
