@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nasrulaev.spring.models.Book;
+import ru.nasrulaev.spring.models.Person;
 import ru.nasrulaev.spring.repositories.BooksRepository;
 
 import java.util.List;
@@ -44,4 +45,10 @@ public class BooksService {
         booksRepository.save(updatedBook);
     }
 
+    @Transactional
+    public void setHolder(Book book, int personId) {
+        Person person = new Person();
+        person.setId(personId);
+        book.setHolder(person);
+    }
 }
