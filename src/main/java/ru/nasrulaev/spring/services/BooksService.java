@@ -7,6 +7,7 @@ import ru.nasrulaev.spring.models.Book;
 import ru.nasrulaev.spring.repositories.BooksRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -23,4 +24,8 @@ public class BooksService {
         return booksRepository.findAll();
     }
 
+    public Book findOne(int id) {
+        Optional<Book> book = booksRepository.findById(id);
+        return book.orElse(null);
+    }
 }
