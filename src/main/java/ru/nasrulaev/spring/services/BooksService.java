@@ -58,4 +58,9 @@ public class BooksService {
         Book book = booksRepository.findById(bookId).get();
         book.setHolder(null);
     }
+
+    @Transactional
+    public void delete(int id) {
+        booksRepository.deleteById(id);
+    }
 }
