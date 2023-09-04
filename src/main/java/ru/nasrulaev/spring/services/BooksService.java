@@ -54,9 +54,8 @@ public class BooksService {
     }
 
     @Transactional
-    public void free(Book book) {
+    public void free(int bookId) {
+        Book book = booksRepository.findById(bookId).get();
         book.setHolder(null);
     }
-
-
 }
