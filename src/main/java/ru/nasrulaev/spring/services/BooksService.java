@@ -47,9 +47,8 @@ public class BooksService {
     }
 
     @Transactional
-    public void setHolder(Book book, int personId) {
-        Person person = new Person();
-        person.setId(personId);
+    public void setHolder(int bookId, Person person) {
+        Book book = booksRepository.findById(bookId).get();
         book.setHolder(person);
         book.setTakingTime(new Date());
     }
