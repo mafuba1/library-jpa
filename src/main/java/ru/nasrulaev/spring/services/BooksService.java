@@ -69,4 +69,8 @@ public class BooksService {
         Optional<Book> book = booksRepository.findById(id);
         return book.map(Book::getHolder).orElse(null);
     }
+
+    public boolean uniqueCheck(String authorName, String title, int publicationYear) {
+        return booksRepository.existsByAuthorNameAndTitleAndPublicationYear(authorName, title, publicationYear);
+    }
 }
