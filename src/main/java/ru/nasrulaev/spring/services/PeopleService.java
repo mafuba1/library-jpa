@@ -27,6 +27,10 @@ public class PeopleService {
         return peopleRepository.findAll();
     }
 
+    public boolean existsById(int id) {
+        return peopleRepository.existsById(id);
+    }
+
     public Person findOne(int id) {
         Optional<Person> person = peopleRepository.findById(id);
         return person.orElse(null);
