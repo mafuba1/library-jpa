@@ -1,5 +1,6 @@
 package ru.nasrulaev.spring.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,5 +61,16 @@ public class PeopleController {
 
         model.addAttribute("person", peopleService.findOne(id));
         return "people/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@PathVariable("id") int id,
+                         @Valid @ModelAttribute("person") Person person, BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
+        if (bindingResult.hasErrors())
+            return "redirect:/people/edit";
+
+        peopleService.update(id, person);
+        return "redirect:/people";
     }
 }
