@@ -48,15 +48,16 @@ public class BooksService {
 
     @Transactional
     public void setHolder(int bookId, Person person) {
-        Book book = booksRepository.findById(bookId).get();
-        book.setHolder(person);
-        book.setTakingTime(new Date());
+        Optional<Book> book = booksRepository.findById(bookId);
+        if (book.isEmpty()) return;
+        book.get().setHolder(person);
+        book.get().setTakingTime(new Date());
     }
 
     @Transactional
     public void free(int bookId) {
-        Book book = booksRepository.findById(bookId).get();
-        book.setHolder(null);
+        Optional<Book> book = booksRepository.findById(bookId);
+        book.ifPresent(value -> value.setHolder(null));
     }
 
     @Transactional
@@ -65,7 +66,7 @@ public class BooksService {
     }
 
     public Person getHolder(int id) {
-        Book book = booksRepository.findById(id).get();
-        return book.getHolder();
+        Optional<Book> book = booksRepository.findById(id);
+        return book.map(Book::getHolder).orElse(null);
     }
 }
