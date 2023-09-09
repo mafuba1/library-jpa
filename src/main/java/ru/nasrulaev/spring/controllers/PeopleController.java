@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.nasrulaev.spring.models.Person;
 import ru.nasrulaev.spring.services.PeopleService;
 
 @Controller
@@ -31,5 +32,11 @@ public class PeopleController {
         model.addAttribute("person", peopleService.findOne(id));
         model.addAttribute("heldBooks", peopleService.getBooks(id));
         return "people/show";
+    }
+
+    @GetMapping("/new")
+    public String newPerson(Model model) {
+        model.addAttribute("person", new Person());
+        return "people/new";
     }
 }
