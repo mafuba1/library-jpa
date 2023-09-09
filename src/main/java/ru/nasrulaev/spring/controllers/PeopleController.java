@@ -52,4 +52,13 @@ public class PeopleController {
         peopleService.save(person);
         return "redirect:/people";
     }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable("id") int id, Model model) {
+        if (!peopleService.existsById(id))
+            return "redirect:/people";
+
+        model.addAttribute("person", peopleService.findOne(id));
+        return "people/edit";
+    }
 }
