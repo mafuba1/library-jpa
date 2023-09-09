@@ -27,6 +27,10 @@ public class PeopleService {
         return peopleRepository.findAll();
     }
 
+    public boolean existsByName(String name) {
+        return peopleRepository.existsPersonByName(name);
+    }
+
     public boolean existsById(int id) {
         return peopleRepository.existsById(id);
     }
@@ -61,5 +65,4 @@ public class PeopleService {
         } else
             return Collections.emptyList();
     }
-
 }

@@ -5,16 +5,16 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.nasrulaev.spring.models.Person;
-import ru.nasrulaev.spring.repositories.PeopleRepository;
+import ru.nasrulaev.spring.services.PeopleService;
 
 @Component
 public class PersonValidator implements Validator {
 
-    private final PeopleRepository peopleRepository;
+    private final PeopleService peopleService;
 
     @Autowired
-    public PersonValidator(PeopleRepository peopleRepository) {
-        this.peopleRepository = peopleRepository;
+    public PersonValidator(PeopleService peopleService) {
+        this.peopleService = peopleService;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Person person = (Person) target;
-        if (peopleRepository.existsPersonByName(person.getName()))
+        if (peopleService.existsByName(person.getName()))
             errors.rejectValue("name", "", "Full name must be unique");
     }
 }
