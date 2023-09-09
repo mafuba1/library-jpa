@@ -8,16 +8,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.nasrulaev.spring.models.Person;
 import ru.nasrulaev.spring.services.PeopleService;
+import ru.nasrulaev.spring.validators.PersonValidator;
 
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
 
     private final PeopleService peopleService;
+    private final PersonValidator personValidator;
 
     @Autowired
-    public PeopleController(PeopleService peopleService) {
+    public PeopleController(PeopleService peopleService, PersonValidator personValidator) {
         this.peopleService = peopleService;
+        this.personValidator = personValidator;
     }
 
 
