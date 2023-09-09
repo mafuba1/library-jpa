@@ -63,4 +63,9 @@ public class BooksService {
     public void delete(int id) {
         booksRepository.deleteById(id);
     }
+
+    public Person getHolder(int id) {
+        Book book = booksRepository.findById(id).get();
+        return book.getHolder();
+    }
 }
