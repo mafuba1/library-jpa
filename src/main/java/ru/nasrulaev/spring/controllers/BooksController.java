@@ -69,4 +69,10 @@ public class BooksController {
         booksService.update(id, book);
         return "redirect:/books";
     }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id) {
+        booksService.delete(id);
+        return "redirect:/books";
+    }
 }
