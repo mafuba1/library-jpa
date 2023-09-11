@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.nasrulaev.spring.models.Book;
+import ru.nasrulaev.spring.models.Person;
 import ru.nasrulaev.spring.services.BooksService;
 import ru.nasrulaev.spring.validators.BookValidator;
 
@@ -49,6 +50,7 @@ public class BooksController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", booksService.findOne(id));
+        model.addAttribute("holder", booksService.getHolder(id));
         return "books/show";
     }
 
@@ -69,6 +71,17 @@ public class BooksController {
         booksService.update(id, book);
         return "redirect:/books";
     }
+
+    @PatchMapping("/{id}/assign")
+    public String assign(@ModelAttribute("holder") Person person, BindingResult bindingResult,
+                         @PathVariable("id") int id) {
+        if (bindingResult.hasErrors())
+            return "redirect:/books/" + id;
+
+        booksService.setHolder(id, person);
+        return "redirect:/books";
+    }
+
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
