@@ -35,6 +35,17 @@ public class BooksController {
         return "books/new";
     }
 
+    @PostMapping
+    public String addBook(@ModelAttribute("book") Book book, BindingResult bindingResult) {
+        bookValidator.validate(book, bindingResult);
+
+        if (bindingResult.hasErrors())
+            return "redirect:/books/new";
+
+        booksService.save(book);
+        return "redirect:/books";
+    }
+
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", booksService.findOne(id));
