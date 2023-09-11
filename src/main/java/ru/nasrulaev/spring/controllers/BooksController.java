@@ -29,6 +29,12 @@ public class BooksController {
         return "books/index";
     }
 
+    @GetMapping("/new")
+    public String newBook(Model model) {
+        model.addAttribute("book", new Book());
+        return "books/new";
+    }
+
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", booksService.findOne(id));
