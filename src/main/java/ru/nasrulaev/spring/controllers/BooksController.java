@@ -2,6 +2,8 @@ package ru.nasrulaev.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.nasrulaev.spring.services.BooksService;
 import ru.nasrulaev.spring.validators.BookValidator;
@@ -18,5 +20,11 @@ public class BooksController {
     public BooksController(BooksService booksService, BookValidator bookValidator) {
         this.booksService = booksService;
         this.bookValidator = bookValidator;
+    }
+
+    @GetMapping
+    public String index(Model model) {
+        model.addAttribute("books", booksService.findAll());
+        return "books/index";
     }
 }
