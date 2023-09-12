@@ -10,6 +10,8 @@ import ru.nasrulaev.spring.models.Person;
 import ru.nasrulaev.spring.services.BooksService;
 import ru.nasrulaev.spring.validators.BookValidator;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/books")
 public class BooksController {
@@ -33,7 +35,9 @@ public class BooksController {
     @GetMapping("/search")
     public String search(@RequestParam(value = "pattern", required = false) String searchPattern,
                          Model model) {
-        model.addAttribute("foundBooks", booksService.searchByTitle(searchPattern));
+        Optional<Book> book = booksService.searchByTitle(searchPattern);
+        model.addAttribute("foundBook", book);
+        book.ifPresent(value -> model.addAttribute("holder", value.getHolder()));
         return "books/search";
     }
 
