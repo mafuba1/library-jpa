@@ -82,6 +82,12 @@ public class BooksController {
         return "redirect:/books";
     }
 
+    @PatchMapping("/{id}/free")
+    public String free(@PathVariable("id") int id) {
+        booksService.free(id);
+        return "redirect:/books/" + id;
+    }
+
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
