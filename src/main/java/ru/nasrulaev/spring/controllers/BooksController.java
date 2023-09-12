@@ -33,7 +33,7 @@ public class BooksController {
         return "books/index";
     }
 
-    @GetMapping()
+    @GetMapping
     public String index(@RequestParam("sort_by_year") Boolean sort,
                         Model model) {
         model.addAttribute("books", booksService.findAll(Sort.by("publicationYear")));
