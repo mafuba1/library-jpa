@@ -1,6 +1,7 @@
 package ru.nasrulaev.spring.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.nasrulaev.spring.models.Book;
@@ -26,6 +27,9 @@ public class BooksService {
         return booksRepository.findAll();
     }
 
+    public List<Book> findAll(Sort sort) {
+        return booksRepository.findAll(sort);
+    }
     public Book findOne(int id) {
         Optional<Book> book = booksRepository.findById(id);
         return book.orElse(null);
