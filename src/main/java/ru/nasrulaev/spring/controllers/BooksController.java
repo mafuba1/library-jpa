@@ -30,6 +30,13 @@ public class BooksController {
         return "books/index";
     }
 
+    @GetMapping("/search")
+    public String search(@RequestParam(value = "pattern", required = false) String searchPattern,
+                         Model model) {
+        model.addAttribute("foundBooks", booksService.searchByTitle(searchPattern));
+        return "books/search";
+    }
+
     @GetMapping("/new")
     public String newBook(Model model) {
         model.addAttribute("book", new Book());
