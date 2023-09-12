@@ -1,6 +1,7 @@
 package ru.nasrulaev.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,13 @@ public class BooksController {
     @GetMapping
     public String index(Model model) {
         model.addAttribute("books", booksService.findAll());
+        return "books/index";
+    }
+
+    @GetMapping()
+    public String index(@RequestParam() Boolean sort,
+                        Model model) {
+        model.addAttribute("books", booksService.findAll(Sort.by("publicationYear")));
         return "books/index";
     }
 
