@@ -1,6 +1,7 @@
 package ru.nasrulaev.spring.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,11 @@ public class BooksService {
     public List<Book> findAll(Sort sort) {
         return booksRepository.findAll(sort);
     }
+
+    public List<Book> findAll(Pageable pageable) {
+        return booksRepository.findAll(pageable).getContent();
+    }
+
     public Book findOne(int id) {
         Optional<Book> book = booksRepository.findById(id);
         return book.orElse(null);
