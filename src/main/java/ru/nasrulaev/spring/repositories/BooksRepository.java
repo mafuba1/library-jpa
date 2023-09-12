@@ -5,10 +5,11 @@ import org.springframework.stereotype.Repository;
 import ru.nasrulaev.spring.models.Book;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BooksRepository extends JpaRepository<Book, Integer> {
-    List<Book> findBooksByTitleStartingWith(String title);
+    Optional<Book> findBookByTitleStartingWith(String title);
 
     List<Book> findBooksByHolderId(int id);
 

@@ -31,8 +31,8 @@ public class BooksService {
         return book.orElse(null);
     }
 
-    public List<Book> searchByTitle(String title) {
-        return booksRepository.findBooksByTitleStartingWith(title);
+    public Optional<Book> searchByTitle(String title) {
+        return booksRepository.findBookByTitleStartingWith(title);
     }
 
     @Transactional
