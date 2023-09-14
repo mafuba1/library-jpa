@@ -48,6 +48,15 @@ public class BooksController {
         return "books/index";
     }
 
+    @GetMapping
+    public String index(@RequestParam("page") int page, @RequestParam("books_per_page") int booksPerPage,
+                        @RequestParam("sort_by_year") boolean sort, Model model) {
+        model.addAttribute("books", booksService.findAll(
+                PageRequest.of(page, booksPerPage, Sort.by("publicationYear"))));
+        return "books/index";
+    }
+
+
     @GetMapping("/search")
     public String search(@RequestParam(value = "pattern", required = false) String searchPattern,
                          Model model) {
