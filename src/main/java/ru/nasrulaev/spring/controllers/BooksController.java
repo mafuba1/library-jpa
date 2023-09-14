@@ -1,6 +1,7 @@
 package ru.nasrulaev.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,13 @@ public class BooksController {
     public String index(@RequestParam("sort_by_year") Boolean sort,
                         Model model) {
         model.addAttribute("books", booksService.findAll(Sort.by("publicationYear")));
+        return "books/index";
+    }
+
+    @GetMapping
+    public String index(@RequestParam("page") int page, @RequestParam("books_per_page") int booksPerPage,
+                        Model model) {
+        model.addAttribute("books", booksService.findAll(PageRequest.of(page, booksPerPage)));
         return "books/index";
     }
 
