@@ -89,7 +89,8 @@ public class BooksController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String show(@PathVariable("id") int id,
+                       @ModelAttribute("person") Person person, Model model) {
         model.addAttribute("book", booksService.findOne(id));
         Person holder = booksService.getHolder(id);
         if (holder == null) model.addAttribute("people", peopleService.findAll());
@@ -116,7 +117,7 @@ public class BooksController {
     }
 
     @PatchMapping("/{id}/assign")
-    public String assign(@ModelAttribute("holder") Person person, BindingResult bindingResult,
+    public String assign(@ModelAttribute("person") Person person, BindingResult bindingResult,
                          @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
             return "redirect:/books/" + id;
