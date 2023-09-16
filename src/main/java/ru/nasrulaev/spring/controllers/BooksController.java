@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.nasrulaev.spring.models.Book;
 import ru.nasrulaev.spring.models.Person;
 import ru.nasrulaev.spring.services.BooksService;
+import ru.nasrulaev.spring.services.PeopleService;
 import ru.nasrulaev.spring.validators.BookValidator;
 
 import java.util.Optional;
@@ -19,12 +20,14 @@ import java.util.Optional;
 public class BooksController {
 
     private final BooksService booksService;
+    private final PeopleService peopleService;
     private final BookValidator bookValidator;
 
 
     @Autowired
-    public BooksController(BooksService booksService, BookValidator bookValidator) {
+    public BooksController(BooksService booksService, PeopleService peopleService, BookValidator bookValidator) {
         this.booksService = booksService;
+        this.peopleService = peopleService;
         this.bookValidator = bookValidator;
     }
 
