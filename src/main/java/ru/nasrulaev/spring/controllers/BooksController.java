@@ -89,7 +89,9 @@ public class BooksController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", booksService.findOne(id));
-        model.addAttribute("holder", booksService.getHolder(id));
+        Person holder = booksService.getHolder(id);
+        if (holder == null) model.addAttribute("people", peopleService.findAll());
+        model.addAttribute("holder", holder);
         return "books/show";
     }
 
