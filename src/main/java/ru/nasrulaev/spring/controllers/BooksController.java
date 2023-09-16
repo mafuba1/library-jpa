@@ -66,7 +66,7 @@ public class BooksController {
     public String search(@RequestParam(value = "pattern", required = false) String searchPattern,
                          Model model) {
         Optional<Book> book = booksService.searchByTitle(searchPattern);
-        model.addAttribute("foundBook", book);
+        model.addAttribute("foundBook", book.orElse(null));
         book.ifPresent(value -> model.addAttribute("holder", value.getHolder()));
         return "books/search";
     }
