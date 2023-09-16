@@ -40,6 +40,7 @@ public class BooksController {
     @GetMapping(params = "sort_by_year")
     public String index(@RequestParam("sort_by_year") boolean sort,
                         Model model) {
+        if (!sort) return index(model);
         model.addAttribute("books", booksService.findAll(Sort.by("publicationYear")));
         return "books/index";
     }
@@ -54,6 +55,7 @@ public class BooksController {
     @GetMapping(params = {"page", "books_per_page", "sort_by_year"})
     public String index(@RequestParam("page") int page, @RequestParam("books_per_page") int booksPerPage,
                         @RequestParam("sort_by_year") boolean sort, Model model) {
+        if (!sort) return index(page, booksPerPage, model);
         model.addAttribute("books", booksService.findAll(
                 PageRequest.of(page, booksPerPage, Sort.by("publicationYear"))));
         return "books/index";
