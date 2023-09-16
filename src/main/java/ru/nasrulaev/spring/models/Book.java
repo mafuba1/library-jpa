@@ -44,9 +44,6 @@ public class Book {
     @Temporal(TemporalType.TIMESTAMP)
     private Date takingTime;
 
-    @Transient
-    private boolean isOverdue;
-
     public Book() {
     }
 
@@ -101,9 +98,4 @@ public class Book {
     public boolean isOverdue() {
         return new Date().getTime() - takingTime.getTime() >= TEN_DAYS;
     }
-
-    public void setOverdue(boolean overdue) {
-        isOverdue = overdue;
-    }
-
 }
