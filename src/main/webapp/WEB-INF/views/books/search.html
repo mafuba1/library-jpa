@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск книги</title>
+</head>
+<body>
+
+<form th:action="@{/books/search}" th:method="GET">
+    <label for="pattern"></label>
+    <input id="pattern" th:name="pattern" type="text">
+
+    <input type="submit" value="Искать">
+</form>
+<hr/>
+
+<div th:switch="${foundBook} == null">
+
+    <p th:case="true">Книг не найдено</p>
+
+    <div th:case="false">
+
+        <a th:href="@{/books/{id}(id=${foundBook.getId()})}"
+           th:text="|${foundBook.getTitle()}, ${foundBook.getAuthorName()}, ${foundBook.getPublicationYear()}|"/>
+
+        <div th:switch="${holder} == null">
+
+            <a th:case="true">Книга сейчас свободна</a>
+            <div th:case="false">
+                Книга сейчас у: <a th:href="@{/people/{id}(id=${holder.getId()})}" th:text="${holder.getName()}"/>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<hr/>
+
+</body>
+</html>
